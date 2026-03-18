@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Block Company{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card"><div class="card-header bg-danger text-white"><h4 class="mb-0">Block Company</h4></div><div class="card-body">
+            <form method="POST" action="{{ url_for('block_company') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">{{ form.company_name.label(class='form-label') }}{{ form.company_name(class='form-control' + (' is-invalid' if form.company_name.errors else '')) }}{% for error in form.company_name.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div>
+                <div class="d-grid"><button type="submit" class="btn btn-danger">Block</button></div>
+            </form>
+            {% if blocked_companies %}
+                <hr><h6>Blocked Companies</h6><ul class="list-group">{% for company in blocked_companies %}<li class="list-group-item">{{ company.company_name }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div></div>
+    </div>
+</div>
+{% endblock %}

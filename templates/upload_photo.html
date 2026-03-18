@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Upload Photo{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card"><div class="card-header bg-success text-white"><h4 class="mb-0">Upload Photo</h4></div><div class="card-body">
+            <form method="POST" action="{{ url_for('upload_photo') }}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.photo.label(class='form-label') }}
+                    {{ form.photo(class='form-control' + (' is-invalid' if form.photo.errors else '')) }}
+                    {% for error in form.photo.errors %}
+                        <div class='invalid-feedback'>{{ error }}</div>
+                    {% endfor %}
+                    <small class='text-muted'>Max size 1MB. Allowed: jpg, jpeg, png.</small>
+                </div>
+                <div class="d-grid"><button type="submit" class="btn btn-success">Upload Photo</button></div>
+            </form>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

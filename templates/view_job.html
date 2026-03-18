@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ job.title }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card"><div class="card-header bg-info text-white"><h4 class="mb-0">{{ job.title }}</h4></div><div class="card-body">
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Experience Required:</strong> {{ job.experience_required }}</p>
+            <p><strong>Salary:</strong>{{ ' ' + (job.salary_min|string if job.salary_min else 'N/A') }} - {{ job.salary_max|string if job.salary_max else 'N/A' }}</p>
+            <p><strong>Type:</strong> {{ job.job_type }}</p>
+            <p><strong>Description:</strong><br>{{ job.description }}</p>
+            <p><strong>Requirements:</strong><br>{{ job.requirements }}</p>
+            <a href="{{ url_for('apply_job', job_id=job.id) }}" class="btn btn-success">Apply Now</a>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

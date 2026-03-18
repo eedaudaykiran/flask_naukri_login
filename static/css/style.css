@@ -1,0 +1,26 @@
+/* Custom Styles */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: none; margin-bottom: 20px; }
+.card-header { border-bottom: none; }
+.form-control:focus, .form-select:focus { border-color: #80bdff; box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25); }
+.alert { border: none; border-radius: 8px; }
+.btn { border-radius: 5px; padding: 8px 20px; }
+.btn-primary { background-color: #007bff; border-color: #007bff; }
+.btn-primary:hover { background-color: #0056b3; border-color: #0056b3; }
+.navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.navbar-brand { font-size: 1.5rem; font-weight: bold; }
+.job-card { transition: transform 0.2s; cursor: pointer; }
+.job-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+.job-card.featured { border-left: 4px solid #ffc107; }
+.progress { border-radius: 3px; overflow: hidden; }
+@media (max-width: 768px) { .table-responsive { border: 0; } }
+footer { margin-top: auto; }
+.fade-in { animation: fadeIn 0.5s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.photo-preview { max-width: 200px; max-height: 200px; margin: 10px auto; border-radius: 50%; border: 3px solid #007bff; padding: 3px; }
+.spinner { border: 3px solid #f3f3f3; border-top: 3px solid #007bff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+[data-tooltip] { position: relative; cursor: help; }
+[data-tooltip]:before { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); padding: 5px 10px; background-color: #333; color: white; border-radius: 3px; font-size: 12px; white-space: nowrap; display: none; }
+[data-tooltip]:hover:before { display: block; }

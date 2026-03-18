@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Upload Resume{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card"><div class="card-header bg-success text-white"><h4 class="mb-0">Upload Resume</h4></div><div class="card-body">
+            <form method="POST" action="{{ url_for('upload_resume') }}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.resume.label(class='form-label') }}
+                    {{ form.resume(class='form-control' + (' is-invalid' if form.resume.errors else '')) }}
+                    {% for error in form.resume.errors %}
+                        <div class='invalid-feedback'>{{ error }}</div>
+                    {% endfor %}
+                    <small class='text-muted'>Max size 2MB. Allowed: pdf, doc, docx, rtf.</small>
+                </div>
+                <div class="d-grid"><button type="submit" class="btn btn-success">Upload</button></div>
+            </form>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

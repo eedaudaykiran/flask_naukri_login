@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Post Job{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card"><div class="card-header bg-success text-white"><h4 class="mb-0">Post New Job</h4></div><div class="card-body">
+            <form method="POST" action="{{ url_for('post_job') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">{{ form.title.label(class='form-label') }}{{ form.title(class='form-control' + (' is-invalid' if form.title.errors else '')) }}{% for error in form.title.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div>
+                <div class="mb-3">{{ form.description.label(class='form-label') }}{{ form.description(class='form-control' + (' is-invalid' if form.description.errors else ''), rows='4') }}{% for error in form.description.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div>
+                <div class="mb-3">{{ form.requirements.label(class='form-label') }}{{ form.requirements(class='form-control' + (' is-invalid' if form.requirements.errors else ''), rows='3') }}{% for error in form.requirements.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div>
+                <div class="row"><div class="col-md-6 mb-3">{{ form.location.label(class='form-label') }}{{ form.location(class='form-control' + (' is-invalid' if form.location.errors else '')) }}{% for error in form.location.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div><div class="col-md-6 mb-3">{{ form.experience_required.label(class='form-label') }}{{ form.experience_required(class='form-control' + (' is-invalid' if form.experience_required.errors else '')) }}{% for error in form.experience_required.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div></div>
+                <div class="row"><div class="col-md-6 mb-3">{{ form.salary_min.label(class='form-label') }}{{ form.salary_min(class='form-control') }}</div><div class="col-md-6 mb-3">{{ form.salary_max.label(class='form-label') }}{{ form.salary_max(class='form-control') }}</div></div>
+                <div class="row"><div class="col-md-6 mb-3">{{ form.job_type.label(class='form-label') }}{{ form.job_type(class='form-select' + (' is-invalid' if form.job_type.errors else '')) }}{% for error in form.job_type.errors %}<div class='invalid-feedback'>{{ error }}</div>{% endfor %}</div>
+                <div class="col-md-6 mb-3"><div class='form-check mt-4'>{{ form.is_featured(class='form-check-input') }}{{ form.is_featured.label(class='form-check-label') }}</div></div></div>
+                <div class="d-grid"><button type="submit" class="btn btn-success">Post Job</button></div>
+            </form>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

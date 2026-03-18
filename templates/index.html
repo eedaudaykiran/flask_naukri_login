@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 text-center">
+        <h1>Welcome to Naukri Clone Job Portal</h1>
+        <p class="lead">A complete job seeker and recruiter platform built with Flask.</p>
+        <a href="{{ url_for('register') }}" class="btn btn-primary me-2">Register</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    </div>
+</div>
+{% endblock %}

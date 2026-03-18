@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Recruiter Dashboard{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4"><div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-building"></i> Recruiter Dashboard</h5></div><div class="card-body">
+            <p><strong>Company:</strong> {{ profile.company_name }}</p>
+            <p><strong>Recruiter:</strong> {{ profile.recruiter_name }} ({{ profile.designation }})</p>
+            <p><strong>Email:</strong> {{ profile.company_email }}</p>
+            <p><strong>Phone:</strong> {{ profile.company_phone }}</p>
+            <p><strong>KYC Verified:</strong> {% if profile.is_kyc_verified %}<span class="badge bg-success">Yes</span>{% else %}<span class="badge bg-warning">No</span>{% endif %}</p>
+            <div class="d-grid gap-2"><a href="{{ url_for('post_job') }}" class="btn btn-success"><i class="fas fa-briefcase"></i> Post New Job</a></div>
+        </div></div>
+        <div class="card"><div class="card-header bg-info text-white"><h5 class="mb-0"><i class="fas fa-list"></i> Jobs Posted</h5></div><div class="card-body">
+            {% if jobs %}
+            <div class="table-responsive"><table class="table table-hover"><thead><tr><th>Title</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody>{% for job in jobs %}<tr><td>{{ job.title }}</td><td>{{ job.location }}</td><td>{% if job.is_active %}<span class="badge bg-success">Active</span>{% else %}<span class="badge bg-secondary">Closed</span>{% endif %}</td><td><a href="{{ url_for('view_applicants', job_id=job.id) }}" class="btn btn-sm btn-outline-primary">View Applicants</a></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="text-center text-muted">No jobs posted yet.</p>{% endif %}
+        </div></div>
+    </div>
+</div>
+{% endblock %}

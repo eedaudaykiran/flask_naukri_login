@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white"><h4 class="mb-0">Create Your Account</h4></div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('register') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                        <small class="text-muted">We'll send verification OTP to this email</small>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.phone.label(class="form-label") }}
+                        {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else "")) }}
+                        {% for error in form.phone.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                        <small class="text-muted">We'll also send OTP to this mobile number</small>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else "")) }}
+                        {% for error in form.username.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), id="password") }}
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                        <div class="mt-2">
+                            <small class="text-muted">Password must:</small>
+                            <ul class="small text-muted">
+                                <li id="length-check" class="text-danger">✓ At least 6 characters</li>
+                                <li id="uppercase-check" class="text-danger">✓ One uppercase letter</li>
+                                <li id="lowercase-check" class="text-danger">✓ One lowercase letter</li>
+                                <li id="number-check" class="text-danger">✓ One number</li>
+                                <li id="special-check" class="text-danger">✓ One special character (!@#$%^&*)</li>
+                                <li id="username-check" class="text-danger">✓ Cannot contain your username</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.confirm_password.label(class="form-label") }}
+                        {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else "")) }}
+                        {% for error in form.confirm_password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.user_type.label(class="form-label") }}
+                        <div class="mt-2">
+                            {% for subfield in form.user_type %}
+                            <div class="form-check form-check-inline">
+                                {{ subfield(class="form-check-input") }}
+                                {{ subfield.label(class="form-check-label") }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% for error in form.user_type.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center"><p class="mb-0">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updatePasswordChecks() {
+    const password = document.getElementById('password').value;
+    const username = document.querySelector('input[name="username"]').value;
+    document.getElementById('length-check').className = password.length >= 6 ? 'text-success' : 'text-danger';
+    document.getElementById('uppercase-check').className = /[A-Z]/.test(password) ? 'text-success' : 'text-danger';
+    document.getElementById('lowercase-check').className = /[a-z]/.test(password) ? 'text-success' : 'text-danger';
+    document.getElementById('number-check').className = /[0-9]/.test(password) ? 'text-success' : 'text-danger';
+    document.getElementById('special-check').className = /[!@#$%^&*(),.?":{}|<>]/.test(password) ? 'text-success' : 'text-danger';
+    document.getElementById('username-check').className = username && password.toLowerCase().includes(username.toLowerCase()) ? 'text-danger' : 'text-success';
+}
+document.getElementById('password').addEventListener('input', updatePasswordChecks);
+document.querySelector('input[name="username"]').addEventListener('input', updatePasswordChecks);
+</script>
+{% endblock %}

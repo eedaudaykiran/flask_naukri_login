@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Create Recruiter Profile{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card"><div class="card-header bg-primary text-white"><h4 class="mb-0">Recruiter Profile</h4></div><div class="card-body">
+            <form method="POST" action="{{ url_for('create_recruiter_profile') }}">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">Company Name</label><input type="text" name="company_name" class="form-control" required></div>
+                    <div class="col-md-6"><label class="form-label">Company Email</label><input type="email" name="company_email" class="form-control" required></div>
+                    <div class="col-md-6"><label class="form-label">Company Phone</label><input type="text" name="company_phone" class="form-control" required></div>
+                    <div class="col-md-6"><label class="form-label">Company Website</label><input type="url" name="company_website" class="form-control"></div>
+                    <div class="col-md-6"><label class="form-label">Recruiter Name</label><input type="text" name="recruiter_name" class="form-control" required></div>
+                    <div class="col-md-6"><label class="form-label">Designation</label><input type="text" name="designation" class="form-control"></div>
+                    <div class="col-md-6"><label class="form-label">PAN Number</label><input type="text" name="pan_number" class="form-control"></div>
+                    <div class="col-12"><label class="form-label">Address</label><textarea name="company_address" class="form-control" rows="3"></textarea></div>
+                </div>
+                <div class="d-grid gap-2 mt-3"><button type="submit" class="btn btn-primary">Create Recruiter Profile</button></div>
+            </form>
+        </div></div>
+    </div>
+</div>
+{% endblock %}
